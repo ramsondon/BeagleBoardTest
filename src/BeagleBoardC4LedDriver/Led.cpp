@@ -31,14 +31,14 @@
  */
 Led::Led(LedDevice dev, BeagleBoardC4LedDriver* driver)
 {
-  deviceid_ = dev;
+  device_ = dev;
 
   // initialize the driver for specific led usage
   driver_ = driver;
-  driver_->init(deviceid_);
+  driver_->init(device_);
 
   // initialze the current state of the device
-  state_ = driver_->is_on(deviceid_);
+  state_ = driver_->is_on(device_);
 }
 /*
  * destructor
@@ -52,7 +52,7 @@ Led::~Led()
  */
 void Led::set_on()
 {
-  driver_->turn_on(deviceid_);
+  driver_->turn_on(device_);
   state_ = true;
 }
 /*
@@ -60,7 +60,7 @@ void Led::set_on()
  */
 void Led::set_off()
 {
-  driver_->turn_off(deviceid_);
+  driver_->turn_off(device_);
   state_ = false;
 }
 /*
@@ -68,7 +68,7 @@ void Led::set_off()
  */
 void Led::toggle()
 {
-  driver_->toggle(deviceid_);
+  driver_->toggle(device_);
   state_ = (state_) ? false : true;
 }
 /*
@@ -82,5 +82,5 @@ bool Led::is_on()
    * time the real device for that?
    */
   // return state_;
-  return driver_->is_on(deviceid_);
+  return driver_->is_on(device_);
 }

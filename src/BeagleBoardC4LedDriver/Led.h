@@ -34,7 +34,7 @@
 class Led {
   protected:
     bool state_;
-    LedDevice deviceid_;
+    LedDevice device_;
     BeagleBoardC4LedDriver* driver_;
 
   public:
