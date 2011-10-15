@@ -35,10 +35,10 @@ Led::Led(LedDevice dev, BeagleBoardC4LedDriver* driver)
 
   // initialize the driver for specific led usage
   driver_ = driver;
-  driver->init(deviceid_);
+  driver_->init(deviceid_);
 
   // initialze the current state of the device
-  state_ = driver->is_on(deviceid_);
+  state_ = driver_->is_on(deviceid_);
 }
 /*
  * destructor
