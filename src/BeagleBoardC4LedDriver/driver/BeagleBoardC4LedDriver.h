@@ -24,6 +24,9 @@
 #ifndef LEDDRIVER_H_
 #define LEDDRIVER_H_
 
+/*
+ * Type Definitions
+ */
 #define U_LONG unsigned long
 #define VOLATILE_U_LONG_PTR volatile U_LONG *
 #define CAST_VOLATILE_U_LONG_PTR(var) ((VOLATILE_U_LONG_PTR)var)
@@ -34,7 +37,8 @@
 #define SET_BIT(bit) (1<<bit)     /* Sets the specified bit to 1 */
 
 /*
- * The built in LEDs of BeagleBoard RC4
+ * The built in LEDs of BeagleBoard C4
+ * Implemented USR0 and USR1
  */
 enum LedDevice
 {
@@ -44,18 +48,46 @@ enum LedDevice
   LED_DEVICE_USR1 = 21
 };
 
-
+/*
+ * Class BeagleBoardC4LedDriver
+ *
+ * LED Driver for the BeagleBoard C4
+ */
 class BeagleBoardC4LedDriver {
   private:
+    /*
+     * enables the ouput for the GPIO5
+     */
     void enable_output(LedDevice dev);
 
   public:
+    /*
+     * constructor
+     */
     BeagleBoardC4LedDriver();
+    /*
+     * deconstructor
+     */
     ~BeagleBoardC4LedDriver();
+    /*
+     * initializes the specific LedDeviced dev
+     */
     void init(LedDevice dev);
+    /*
+     * turns on the LedDevice dev
+     */
     void turn_on(LedDevice dev);
+    /*
+     * turns off the LedDevice dev
+     */
     void turn_off(LedDevice dev);
+    /*
+     * toggles the LedDevice dev
+     */
     void toggle(LedDevice dev);
+    /*
+     * returns true if the LedDevice dev is turned on
+     */
     bool is_on(LedDevice dev);
 };
 

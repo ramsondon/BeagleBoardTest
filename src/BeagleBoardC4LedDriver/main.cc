@@ -28,18 +28,19 @@
 #include "Led.h"
 
 
+/*
+ * BeagleBoard LED Test.
+ * The Toggle does not appear as a smooth toggle between USR0 and USR1 on the
+ * BeagleBoard. The reason for this is that both LEDs toggle independently
+ * from each other.
+ *
+ * This test is for a single LED Object and not for combined hardware actions.
+ */
 int main(int argc, char **argv) {
 
   bool finished = false;
-  printf("starting BeagleBoard LED driver test\n");
-
-  printf("creating LED driver\n");
   BeagleBoardC4LedDriver* driver = new BeagleBoardC4LedDriver();
-
-  printf("creating LED component USR0\n");
   Led* usr0 = new Led(LED_DEVICE_USR0, driver);
-
-  printf("creating LED component USR1\n");
   Led* usr1 = new Led(LED_DEVICE_USR1, driver);
 
   printf("start set on/off test\n");
@@ -53,7 +54,7 @@ int main(int argc, char **argv) {
   usr1->set_on();
   printf("usr1 status: %d\n", usr1->is_on());
 
-  printf("start toggling leds\n");
+  printf("start endless toggling LEDs\n");
 
   do {
      usr0->toggle();

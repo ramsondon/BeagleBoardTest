@@ -26,6 +26,11 @@
 
 #include "driver/BeagleBoardC4LedDriver.h"
 
+/*
+ * Class Led
+ *
+ * A specific Led Device for the BeagleBoard C4
+ */
 class Led {
   protected:
     bool state_;

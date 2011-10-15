@@ -23,33 +23,35 @@
 
 #include "BeagleBoardC4LedDriver.h"
 
-BeagleBoardC4LedDriver::BeagleBoardC4LedDriver() {
-}
-
-BeagleBoardC4LedDriver::~BeagleBoardC4LedDriver() {
-}
+BeagleBoardC4LedDriver::BeagleBoardC4LedDriver() {}
+BeagleBoardC4LedDriver::~BeagleBoardC4LedDriver() {}
 
 void BeagleBoardC4LedDriver::init(LedDevice dev)
 {
   enable_output(dev);
 }
+
 void BeagleBoardC4LedDriver::turn_on(LedDevice dev)
 {
   *CAST_VOLATILE_U_LONG_PTR(GPIO5_DATAOUT) |= SET_BIT(dev);
 }
+
 void BeagleBoardC4LedDriver::turn_off(LedDevice dev)
 {
   *CAST_VOLATILE_U_LONG_PTR(GPIO5_DATAOUT) &= SET_BIT(dev);
 }
+
 void BeagleBoardC4LedDriver::toggle(LedDevice dev)
 {
   *CAST_VOLATILE_U_LONG_PTR(GPIO5_DATAOUT) ^= SET_BIT(dev);
 }
+
 bool BeagleBoardC4LedDriver::is_on(LedDevice dev)
 {
   U_LONG state = *CAST_VOLATILE_U_LONG_PTR(GPIO5_DATAOUT);
   return (state | SET_BIT(dev) == state) ? true : false;
 }
+
 // enable output for LED 0,1
 void BeagleBoardC4LedDriver::enable_output(LedDevice dev)
 {
