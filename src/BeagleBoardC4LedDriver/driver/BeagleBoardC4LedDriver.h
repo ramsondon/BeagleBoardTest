@@ -67,7 +67,7 @@ class BeagleBoardC4LedDriver {
      */
     BeagleBoardC4LedDriver();
     /*
-     * deconstructor
+     * destructor
      */
     ~BeagleBoardC4LedDriver();
     /*

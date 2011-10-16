@@ -57,7 +57,7 @@ void BeagleBoardC4LedDriver::toggle(LedDevice dev1, LedDevice dev2) {
 bool BeagleBoardC4LedDriver::is_on(LedDevice dev) {
   // FIXME: Check if here is somewhere a bug
   U_LONG state = *CAST_VOLATILE_U_LONG_PTR(GPIO5_DATAOUT);
-  return (state | SET_BIT(dev) == state) ? true : false;
+  return (static_cast<U_LONG>(state | SET_BIT(dev)) == state) ? true : false;
 }
 
 void BeagleBoardC4LedDriver::enable_output(LedDevice dev) {
