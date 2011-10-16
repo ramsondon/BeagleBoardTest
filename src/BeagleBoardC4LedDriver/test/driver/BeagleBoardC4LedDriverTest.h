@@ -1,4 +1,4 @@
-/* BeagleBoardC4LedDriver.cc
+/* BeagleBoardC4LedDriverTest.h
  * 
  * Copyright (c) 2011 The BeagleBoardC4LedDriver project.
  *
@@ -17,31 +17,25 @@
  * Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  *
  *
- *  Created on: Oct 15, 2011
+ *  Created on: Oct 16, 2011
  *      Author: Matthias Schmid <m.schmid@students.fhv.at>
  */
 
-#include <stdio.h>
+#ifndef BEAGLEBOARDC4LEDDRIVERTEST_H_
+#define BEAGLEBOARDC4LEDDRIVERTEST_H_
 
-#include "test/driver/BeagleBoardC4LedDriverTest.h"
+#include "../HardwareTest.h"
+#include "../../driver/BeagleBoardC4LedDriver.h"
 
-/*
- * BeagleBoard LED HardwareTest.
- * The Toggle does not appear as a smooth toggle between USR0 and USR1 on the
- * BeagleBoard. The reason for this is that both LEDs toggle independently
- * from each other.
- *
- * This test is for a single LED Object and not for combined hardware actions.
- */
-int main(int argc, char **argv) {
+class BeagleBoardC4LedDriverTest : public HardwareTest {
+  private:
+    BeagleBoardC4LedDriver* driver_;
 
-  printf("start test cases\n");
+  protected:
+  public:
+    BeagleBoardC4LedDriverTest();
+    ~BeagleBoardC4LedDriverTest();
+    void run();
+};
 
-  HardwareTest* ledDriverTest = new BeagleBoardC4LedDriverTest();
-
-  ledDriverTest->run();
-
-  delete ledDriverTest;
-  /* end of BeagleBoardC4LedDriverTest program */
-  return 0;
-}
+#endif /* BEAGLEBOARDC4LEDDRIVERTEST_H_ */
