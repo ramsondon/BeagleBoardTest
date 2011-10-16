@@ -22,38 +22,45 @@
  */
 
 #include "BeagleBoardC4LedDriver.h"
+#include <stdio.h>
+BeagleBoardC4LedDriver::BeagleBoardC4LedDriver() {
+}
+BeagleBoardC4LedDriver::~BeagleBoardC4LedDriver() {
+}
 
-BeagleBoardC4LedDriver::BeagleBoardC4LedDriver() {}
-BeagleBoardC4LedDriver::~BeagleBoardC4LedDriver() {}
-
-void BeagleBoardC4LedDriver::init(LedDevice dev)
-{
+void BeagleBoardC4LedDriver::init(LedDevice dev) {
   enable_output(dev);
 }
 
-void BeagleBoardC4LedDriver::turn_on(LedDevice dev)
-{
+void BeagleBoardC4LedDriver::turn_on(LedDevice dev) {
+  // sets the dev bit of GPIO5_DATAOUT to 1
   *CAST_VOLATILE_U_LONG_PTR(GPIO5_DATAOUT) |= SET_BIT(dev);
 }
 
-void BeagleBoardC4LedDriver::turn_off(LedDevice dev)
-{
-  *CAST_VOLATILE_U_LONG_PTR(GPIO5_DATAOUT) &= SET_BIT(dev);
+void BeagleBoardC4LedDriver::turn_off(LedDevice dev) {
+  // sets the dev bit of GPIO5_DATAOUT to 0
+  *CAST_VOLATILE_U_LONG_PTR(GPIO5_DATAOUT) &= ~SET_BIT(dev);
 }
 
-void BeagleBoardC4LedDriver::toggle(LedDevice dev)
-{
+void BeagleBoardC4LedDriver::toggle(LedDevice dev) {
+  // inverts the dev bit of GPIO5_DATAOUT
   *CAST_VOLATILE_U_LONG_PTR(GPIO5_DATAOUT) ^= SET_BIT(dev);
 }
 
-bool BeagleBoardC4LedDriver::is_on(LedDevice dev)
-{
+void BeagleBoardC4LedDriver::toggle(LedDevice dev1, LedDevice dev2) {
+  // inverts the dev1 and dev2 bit of GPIO5_DATAOUT
+  U_LONG state = *CAST_VOLATILE_U_LONG_PTR(GPIO5_DATAOUT);
+  *CAST_VOLATILE_U_LONG_PTR(GPIO5_DATAOUT) = ((state ^ SET_BIT(dev1)
+      ^ SET_BIT(dev2)));
+}
+
+bool BeagleBoardC4LedDriver::is_on(LedDevice dev) {
+  // FIXME: Check if here is somewhere a bug
   U_LONG state = *CAST_VOLATILE_U_LONG_PTR(GPIO5_DATAOUT);
   return (state | SET_BIT(dev) == state) ? true : false;
 }
 
-// enable output for LED 0,1
-void BeagleBoardC4LedDriver::enable_output(LedDevice dev)
-{
+void BeagleBoardC4LedDriver::enable_output(LedDevice dev) {
+  // enable output for LED 0,1
   *CAST_VOLATILE_U_LONG_PTR(GPIO5_OE) |= SET_BIT(dev);
 }

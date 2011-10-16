@@ -43,24 +43,26 @@ int main(int argc, char **argv) {
   Led* usr0 = new Led(LED_DEVICE_USR0, driver);
   Led* usr1 = new Led(LED_DEVICE_USR1, driver);
 
+
+  usr0->set_off();
+  usr1->set_on();
+
   printf("start set on/off test\n");
 
-  usr0->set_on();
   printf("usr0 status: %d\n", usr0->is_on());
-  usr1->set_off();
-  printf("usr1 status: %d\n", usr1->is_on());
-  usr0->set_off();
-  printf("usr0 status: %d\n", usr0->is_on());
-  usr1->set_on();
   printf("usr1 status: %d\n", usr1->is_on());
 
   printf("start endless toggling LEDs\n");
 
   do {
-     usr0->toggle();
-     printf("usr0 status: %d\n", usr0->is_on());
-     usr1->toggle();
-     printf("usr1 status: %d\n", usr1->is_on());
+//     usr0->toggle();
+//     printf("usr0 status: %d\n", usr0->is_on());
+//     usr1->toggle();
+//     printf("usr1 status: %d\n", usr1->is_on());
+
+    driver->toggle(LED_DEVICE_USR0, LED_DEVICE_USR1);
+    printf("usr0 status: %d\n", usr0->is_on());
+    printf("usr1 status: %d\n", usr1->is_on());
   } while (!finished);
 
   /* end of BeagleBoardC4LedDriverTest program */
