@@ -34,12 +34,6 @@
 #define GPIO5_OE 0x49054034       /* GPIO5 output enable address */
 #define GPIO5_DATAOUT 0x4905603C  /* GPIO5 data out register address*/
 
-#define USR0_OFF 0xFFBFFFFF
-#define USR0_ON  0x00400000
-#define USR1_OFF 0xFFDFFFFF
-#define USR1_ON  0x00200000
-
-
 #define SET_BIT(bit) (1<<bit)     /* Sets the specified bit to 1 */
 
 
